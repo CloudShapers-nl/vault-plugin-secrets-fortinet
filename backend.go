@@ -45,6 +45,7 @@ func backend() *fortigateBackend {
 			pathRole(&b),
 			[]*framework.Path{
 				pathConfig(&b),
+				pathCredentials(&b),
 			},
 		),
 		Secrets: []*framework.Secret{

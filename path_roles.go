@@ -12,6 +12,7 @@ import (
 // for a Vault role to access and call the Fortigate
 // token endpoints
 type fortigateRoleEntry struct {
+	Name         string        `json:"name"`
 	AdminProfile string        `json:"admin_profile"`
 	TTL          time.Duration `json:"ttl"`
 	MaxTTL       time.Duration `json:"max_ttl"`
@@ -20,6 +21,7 @@ type fortigateRoleEntry struct {
 // toResponseData returns response data for a role
 func (r *fortigateRoleEntry) toResponseData() map[string]interface{} {
 	respData := map[string]interface{}{
+		"name":          r.Name,
 		"ttl":           r.TTL.Seconds(),
 		"max_ttl":       r.MaxTTL.Seconds(),
 		"admin_profile": r.AdminProfile,

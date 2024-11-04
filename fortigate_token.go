@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	fortiGateAdminType = "fortigate_token"
+	fortiGateTokenType = "fortigate_token"
 )
 
 // fortigateToken defines a secret for the Fortigate admin
@@ -24,7 +24,7 @@ type fortigateToken struct {
 // and how it should be revoked or renewed.
 func (b *fortigateBackend) fortigateToken() *framework.Secret {
 	return &framework.Secret{
-		Type: fortiGateAdminType,
+		Type: fortiGateTokenType,
 		Fields: map[string]*framework.FieldSchema{
 			"username": {
 				Type:        framework.TypeString,
