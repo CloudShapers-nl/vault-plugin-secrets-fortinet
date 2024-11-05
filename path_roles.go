@@ -68,6 +68,7 @@ func pathRole(b *fortigateBackend) []*framework.Path {
 					Callback: b.pathRolesDelete,
 				},
 			},
+			ExistenceCheck:  b.pathRoleExistenceCheck,
 			HelpSynopsis:    pathRoleHelpSynopsis,
 			HelpDescription: pathRoleHelpDescription,
 		},
@@ -82,6 +83,14 @@ func pathRole(b *fortigateBackend) []*framework.Path {
 			HelpDescription: pathRoleListHelpDescription,
 		},
 	}
+}
+
+func (b *fortigateBackend) pathRoleExistenceCheck(ctx context.Context, req *logical.Request, data *framework.FieldData) (bool, error) {
+	out, err := req.Storage.Get(ctx, req.Path)
+	if err != nil {
+		return false, fmt.Errorf("existence check failed: %w", err)
+	}
+	return out != nil, nil
 }
 
 func (b *fortigateBackend) getRole(ctx context.Context, s logical.Storage, name string) (*fortigateRoleEntry, error) {
